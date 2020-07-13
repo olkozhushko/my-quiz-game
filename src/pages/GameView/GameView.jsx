@@ -14,7 +14,7 @@ import StyledGameView from './StyledGameView'
 
 const GameView = () => {
     const user = useSelector(state => state.auth.user)
-    const { questions, currentQuestion, score } = useSelector(
+    const { questions, currentQuestion, score, questionsLoading } = useSelector(
         state => state.quiz
     )
 
@@ -81,7 +81,8 @@ const GameView = () => {
 
     const handlePreviousQuestionNavigation = () => {
         dispatch(previousQuestion())
-        //when navigating to previous page we need to set current question answer and delete the last record from stack
+
+        //when navigating to previous page we need to set current question state
 
         const currentQuestionContent =
             quizHistory[currentQuestion] || quizHistory[currentQuestion - 1]
@@ -95,9 +96,11 @@ const GameView = () => {
         history.push('/results')
     }
 
+    console.log(questionsLoading, 'questionsLoading')
+
     return (
         <StyledGameView>
-            {questions ? (
+            {!questionsLoading && questions ? (
                 <div className='game-wrapper'>
                     <h1>Quiz Game</h1>
                     <section className='general-info'>
@@ -183,7 +186,7 @@ const GameView = () => {
                 </div>
             ) : (
                 <div className='spinner-wrapper'>
-                    <div class='lds-circle'>
+                    <div className='lds-circle'>
                         <div></div>
                     </div>
                 </div>

@@ -7,14 +7,11 @@ import {
 } from '../types'
 
 export const logIn = user => async dispatch => {
-    console.log('login dispatch')
-
     dispatch({ type: IS_LOADING })
 
     const data = await auth.login(user)
     dispatch({ type: IS_NOT_LOADING })
 
-    console.log(data, 'data')
     dispatch({ type: USER_LOGGED_IN, user: data })
 }
 
