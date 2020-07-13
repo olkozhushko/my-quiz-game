@@ -1,25 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect} from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+
+import {useDispatch, useSelector} from "react-redux"
+
+import PrivateRoute from "./components/common/PrivateRoute"
+
+import LoginView from "./pages/LoginView/LoginView.jsx"
+import GameView from "./pages/GameView/GameView.jsx"
+import ResultsView from "./pages/ResultsView/ResultsView"
+import NotFoundPage from "./pages/NotFoundPage"
+
+import AppLoader from "./components/common/AppLoader"
+
+import {getQuestions} from "./redux/actions/quizActions"
+
 import './App.css';
 
 function App() {
+
+  const dispatch = useDispatch()
+
+  const isLoading = useSelector(state => state.root.isLoading)
+  const gameIsFinished = useSelector(state => state.quiz.gameIsFinished)
+
+  console.log(isLoading, 'isLoading')
+
+  useEffect(() => {
+    dispatch(getQuestions())
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    {isLoading && <AppLoader />}
+    <Router>
+      <Switch>
+        <Route exact path="/login">
+            <LoginView />
+        </Route>
+        <PrivateRoute exact path="/" component={GameView} shouldBeRedirected={gameIsFinished} redirectTo="/results"/>
+        <PrivateRoute exact path="/results" component={ResultsView} shouldBeRedirected={!gameIsFinished} redirectTo="/"/>
+        <Route component={NotFoundPage}/>
+      </Switch>
+    </Router>
+    </>
   );
 }
 
