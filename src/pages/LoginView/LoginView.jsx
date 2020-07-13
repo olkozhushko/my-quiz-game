@@ -11,8 +11,6 @@ const LoginView = () => {
     const dispatch = useDispatch()
     const user = useSelector(state => state.auth.user)
 
-    console.log(user, 'user')
-
     const [player, setPlayer] = useState('')
     const [playerError, setPlayerError] = useState(false)
 
@@ -28,6 +26,13 @@ const LoginView = () => {
     const handlePlayerChange = e => {
         setPlayer(e.target.value)
         e.target.value ? setPlayerError(false) : setPlayerError(true)
+    }
+
+    const handleKeyDown = e => {
+        if (e.key === 'Enter') {
+            e.preventDefault()
+            handleStartGame(e)
+        }
     }
 
     return (
@@ -47,6 +52,7 @@ const LoginView = () => {
                                     name='player'
                                     value={player}
                                     onChange={handlePlayerChange}
+                                    onKeyDown={handleKeyDown}
                                 />
                             </div>
                             <p
