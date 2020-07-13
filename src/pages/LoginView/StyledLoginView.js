@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from 'styled-components'
 
 const StyledLoginView = styled.section`
     width: 100%;
@@ -51,9 +51,9 @@ const StyledLoginView = styled.section`
         }
         p {
             margin: 0;
-            color: tomato; 
-            font-size: 0.9rem; 
-            margin-top: 0.5rem; 
+            color: tomato;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
         }
         & .button-wrapper {
             margin-top: 1rem;
@@ -68,8 +68,11 @@ const StyledLoginView = styled.section`
                 color: #fff;
                 border: none;
                 cursor: pointer;
+                text-transform: uppercase;
+                font-weight: 600;
+                font-size: 1rem;
+            }
         }
-      }
     }
 `
 export default StyledLoginView

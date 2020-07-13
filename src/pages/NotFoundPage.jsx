@@ -1,6 +1,6 @@
-import React from "react"
-import styled from "styled-components"
-import {useHistory} from "react-router-dom"
+import React from 'react'
+import styled from 'styled-components'
+import { useHistory } from 'react-router-dom'
 
 const StyledNotFoundPage = styled.div`
     width: 100%;
@@ -26,13 +26,14 @@ const StyledNotFoundPage = styled.div`
 `
 
 const NotFoundPage = () => {
-   
     const history = useHistory()
 
     return (
         <StyledNotFoundPage>
             <h1>Page Not Found</h1>
-            <button type="button" onClick={() => history.push('/')}>Navigate to main page</button>
+            <button type='button' onClick={() => history.push('/')}>
+                Navigate to main page
+            </button>
         </StyledNotFoundPage>
     )
 }

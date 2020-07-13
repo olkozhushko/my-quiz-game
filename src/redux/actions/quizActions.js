@@ -1,11 +1,19 @@
-import {QUESTIONS_FETCHED, NEXT_QUESTION, PREVIOUS_QUESTION, INCREASE_SCORE, DECREASE_SCORE, RESET_GAME, FINISH_GAME} from "../types"
-import fetchQuestions from "../../services/apiCalls/fetchQuestions"
+import {
+    QUESTIONS_FETCHED,
+    NEXT_QUESTION,
+    PREVIOUS_QUESTION,
+    INCREASE_SCORE,
+    DECREASE_SCORE,
+    RESET_GAME,
+    FINISH_GAME
+} from '../types'
+import fetchQuestions from '../../services/apiCalls/fetchQuestions'
 
-export const getQuestions = () => async (dispatch) => {
+export const getQuestions = () => async dispatch => {
     try {
         const data = await fetchQuestions()
-        dispatch({type: QUESTIONS_FETCHED, questions: data.results})
-    } catch(err) {
+        dispatch({ type: QUESTIONS_FETCHED, questions: data.results })
+    } catch (err) {
         console.log(err)
     }
 }
@@ -19,7 +27,7 @@ export const previousQuestion = () => ({
 })
 
 export const increaseScore = () => ({
-    type: INCREASE_SCORE,
+    type: INCREASE_SCORE
 })
 
 export const decreaseScore = () => ({
