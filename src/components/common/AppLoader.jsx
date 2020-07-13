@@ -83,7 +83,7 @@ const StyledLoader = styled.div`
 const AppLoader = () => {
     return (
         <StyledLoader>
-            <div class='lds-grid'>
+            <div className='lds-grid'>
                 <div></div>
                 <div></div>
                 <div></div>
