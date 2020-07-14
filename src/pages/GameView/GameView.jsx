@@ -49,7 +49,7 @@ const GameView = () => {
 
         setQuizHistory(newHistory)
 
-        localStorage.setItem('quizHistory', JSON.stringify(quizHistory))
+        localStorage.setItem('quizHistory', JSON.stringify(newHistory))
     }
 
     const [isCorrectAnswerGiven, setIsCorrectAnswerGiven] = useState(false)
@@ -70,6 +70,7 @@ const GameView = () => {
         setIsCorrectAnswerGiven(checkIfCorrect)
 
         checkIfCorrect && dispatch(increaseScore())
+        updateHistory(answer)
     }
 
     const handleNextQuestionNavigation = () => {
@@ -77,26 +78,35 @@ const GameView = () => {
         setButtonPressedName(null)
         setIsCorrectAnswerGiven(false)
         dispatch(nextQuestion())
+        updateCurrentState(1)
     }
+
+    const updateCurrentState = step => {
+        //we take step as param in a form of (-1, 1) to ensure current question correctness
+        const currentQuestionContent = quizHistory[currentQuestion + step]
+
+        if (!currentQuestionContent) return
+
+        setButtonPressedName(currentQuestionContent.choice)
+        setIsCorrectAnswerGiven(currentQuestionContent.correctAnswerGiven)
+    }
+
+    console.log(currentQuestion, 'currentQuestion')
 
     const handlePreviousQuestionNavigation = () => {
         dispatch(previousQuestion())
 
         //when navigating to previous page we need to set current question state
 
-        const currentQuestionContent =
-            quizHistory[currentQuestion] || quizHistory[currentQuestion - 1]
+        console.log(currentQuestion, quizHistory[currentQuestion], 'previous')
 
-        setButtonPressedName(currentQuestionContent.choice)
-        setIsCorrectAnswerGiven(currentQuestionContent.correctAnswerGiven)
+        updateCurrentState(-1)
     }
 
     const goToResultPage = () => {
         dispatch(finishGame())
         history.push('/results')
     }
-
-    console.log(questionsLoading, 'questionsLoading')
 
     return (
         <StyledGameView>
