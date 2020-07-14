@@ -29,6 +29,9 @@ const StyledGameView = styled.div`
             width: 60%;
         }
     }
+    .btn-active {
+        background: #d2614d !important;
+    }
     .general-info {
         display: flex;
         justify-content: space-between;
@@ -100,7 +103,7 @@ const StyledGameView = styled.div`
                 }
                 &:last-child {
                     margin-bottom: 2rem;
-                    background: #ff4d4d;
+                    background: #558fa5;
                 }
             }
         }
@@ -108,12 +111,13 @@ const StyledGameView = styled.div`
     .btn-step {
         background: none;
         border-radius: 0.3rem;
-        padding: 0.3rem 1rem;
+        padding: 0.45rem 1rem;
         text-transform: uppercase;
-        border: 1px solid grey;
+        border: 2px solid darkblue;
         cursor: pointer;
+        font-weight: 500;
         &.btn-prev {
-            border-color: tomato;
+            border-color: #e07878;
         }
         &.btn-next {
             border-color: dodgerblue;

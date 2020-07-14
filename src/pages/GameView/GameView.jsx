@@ -130,24 +130,22 @@ const GameView = () => {
                         <div className='choices'>
                             <button
                                 type='button'
-                                style={{
-                                    boxShadow:
-                                        buttonPressedName === 'True'
-                                            ? '0 0 10px rgba(0, 0, 0, 0.7)'
-                                            : 'none'
-                                }}
+                                className={
+                                    buttonPressedName === 'True'
+                                        ? 'btn-active'
+                                        : ''
+                                }
                                 onClick={() => handleAnswer('True')}
                             >
                                 True
                             </button>
                             <button
                                 type='button'
-                                style={{
-                                    boxShadow:
-                                        buttonPressedName === 'False'
-                                            ? '0 0 10px rgba(0, 0, 0, 0.7)'
-                                            : 'none'
-                                }}
+                                className={
+                                    buttonPressedName === 'False'
+                                        ? 'btn-active'
+                                        : ''
+                                }
                                 onClick={() => handleAnswer('False')}
                             >
                                 False
